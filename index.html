@@ -1,15 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <script src="script2.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiempo de Huelva</title>
 </head>
+
 <body>
+  <h1>Petición AJAX al tiempo de Huelva </h1>
+  <table id="demo"></table>
 
-<h1>Javascript2</h1>
-<p>Ejercicio 2 Java Script</p>
 
-<p id="demo"></p>
 
-<button type="button" onclick="escribe()">Escribe texto</button>
+  <script>
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+      tiempo(this);
+    }
+    xhttp.open("GET", "tiempoHuelva.xml");
+    xhttp.send();
+    function tiempo(xml) {
+      const xmlDoc = xml.responseXML;
+      const x = xmlDoc.getElementsByTagName("dia");
+      let table = "<tr><th>T. Máxima</th><th>T. Mínima</th></tr> <th></th> estado heaven </th></tr>";
+      for (let i = 0; i < x.length; i++) {
+        table += "<tr><td>" +
+          x[i].getElementsByTagName("maxima")[0].childNodes[0].nodeValue +
+          "</td><td>" +
+          x[i].getElementsByTagName("estado_cielo")[2].attributes[1].nodeValue +
+          "</td><td>" +
+          x[i].getElementsByTagName("minima")[0].childNodes[0].nodeValue +
+          "</td></tr>";
+      }
+      document.getElementById("demo").innerHTML = table;
+    }
+  </script>
 </body>
+
 </html>
+
+<!-- Temperatura máxima:-->
+<!-- document.getElementsByTagName('maxima')[0].childNodes[0].nodeValue-->
+<!-- Temperatura mínima: -->
+<!-- document.getElementsByTagName('minima')[0].childNodes[0].nodeValue -->
+
+<!-- document.getElementsByTagName('estado_cielo')[0]. -->
+
+
+<!-- http://www.aemet.es/xml/municipios/localidad_21055.xml -->
+
+<!-- document.getElementsByTagName('dia')[0].getElementsByTagName('estado_cielo')[0].attributes[] -->

@@ -1,0 +1,8 @@
+--Ejercicio2--
+
+SELECT SUM(i.calories*t.quantity)/100
+FROM ingredients i, items t, recipes r
+WHERE i.ingred_id=t.ingred_id
+AND t.recipe_id=r.recipe_id
+AND r.description='Gazpacho';
+
